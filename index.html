@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Allen Sanchez — Software Developer</title>
+  <title>Allen Sanchez — Full-Stack Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
@@ -383,7 +383,31 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
     }
 
     .project-card h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; margin-bottom: 0.4rem; }
-    .project-card p { color: var(--muted); font-size: 0.87rem; flex: 1; margin-bottom: 1.25rem; }
+    .project-card p { color: var(--muted); font-size: 0.87rem; flex: 1; margin-bottom: 1.1rem; }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1.25rem;
+    }
+    .project-tag {
+      font-size: 0.66rem;
+      letter-spacing: 0.05em;
+      color: #a9a69f;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2rem;
+      white-space: nowrap;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
 
     .project-link {
       display: inline-flex;
@@ -396,6 +420,116 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
       transition: gap 0.2s;
     }
     .project-link:hover { gap: 0.65rem; }
+    .project-link.static { color: var(--muted); cursor: default; }
+
+    .project-featured {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      background: var(--accent-dim);
+      padding: 0.15rem 0.5rem;
+      border-radius: 2rem;
+      white-space: nowrap;
+    }
+
+    /* PROJECT SCREENSHOT */
+    .project-shot {
+      position: relative;
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: zoom-in;
+      padding: 0;
+    }
+    .project-shot img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
+    }
+    .project-shot:hover img, .project-shot:focus-visible img { transform: scale(1.04); }
+    .project-shot:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .shot-badge {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 1.1rem 0.75rem 0.5rem;
+      font-size: 0.66rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: linear-gradient(to top, rgba(15,17,23,0.95), transparent);
+      text-align: left;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .project-shot:hover .shot-badge, .project-shot:focus-visible .shot-badge { opacity: 1; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(8, 9, 13, 0.97);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 4.5rem 5vw;
+      backdrop-filter: blur(6px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.7);
+    }
+    .lb-btn {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .lb-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .lb-close { top: 1.25rem; right: 1.25rem; }
+    .lb-prev  { left: 1.25rem; top: 50%; transform: translateY(-50%); }
+    .lb-next  { right: 1.25rem; top: 50%; transform: translateY(-50%); }
+    .lb-prev.hidden, .lb-next.hidden { display: none; }
+    .lb-caption {
+      position: absolute; left: 0; right: 0; bottom: 1.5rem;
+      text-align: center; color: var(--muted); font-size: 0.78rem;
+    }
+    .lb-caption strong { color: var(--ink); font-weight: 500; }
+
+    /* FEATURED (full-width) CARD */
+    .project-card.wide { grid-column: 1 / -1; }
+
+    .project-card.wide .project-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 0.5rem 2.5rem;
+      align-items: start;
+    }
+    .project-card.wide .project-title { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+    .project-card.wide .project-title h3 { margin-bottom: 0; }
+    .project-card.wide .project-desc { color: var(--muted); font-size: 0.9rem; }
+    .project-card.wide .project-shot { aspect-ratio: 21 / 9; margin-bottom: 1.5rem; }
+
+    @media (max-width: 768px) {
+      .project-card.wide .project-body { grid-template-columns: 1fr; gap: 0.75rem; }
+    }
 
     /* CONTACT */
     #contact { background: rgba(10, 12, 18, 0.88); }
@@ -430,7 +564,13 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
     .contact-arrow { color: var(--muted); font-size: 1rem; transition: transform 0.2s, color 0.2s; }
     .contact-row:hover .contact-arrow { transform: translateX(4px); color: var(--accent); }
 
-    .linkedin-note { font-size: 0.72rem; color: var(--muted); font-style: italic; }
+    .footer-social { display: flex; gap: 1.4rem; align-items: center; }
+    .footer-social a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-social a:hover { color: var(--accent); }
 
     /* FOOTER */
     footer {
@@ -530,10 +670,11 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
       <div class="hero-inner">
         <span class="hero-tag">Available for opportunities</span>
         <h1>Hi, I'm<br><em>Allen Sanchez</em></h1>
-        <p class="hero-sub">A software developer who builds thoughtful, functional things for the web.</p>
+        <p class="hero-sub">A full-stack developer building complete products for the web — from database schema to deployed interface.</p>
         <div class="hero-cta">
           <a href="#projects" class="btn-primary">View my work</a>
           <a href="#contact" class="btn-outline">Get in touch</a>
+          <a href="https://www.linkedin.com/in/allen-sanchez-007512404/" target="_blank" rel="noopener" class="btn-outline">LinkedIn</a>
         </div>
       </div>
       <div class="hero-photo-wrap">
@@ -558,12 +699,14 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
       <div class="about-text">
         <p class="section-label">About</p>
         <h2>A developer who cares about craft.</h2>
-        <p>I'm Allen, a software developer based in the Philippines. I enjoy turning ideas into clean, working code — whether that's a small game, a web app, or something in between.</p>
+        <p>I'm Allen, a full-stack developer based in the Philippines. I build complete, working products — the database schema, the API, the interface, the deployment, and the tests.</p>
+        <p>Most of my work is in PHP with Laravel and MySQL, and in React and Next.js on the front end. I've shipped inventory and point-of-sale systems, community directory platforms, and games — including one with 192 automated tests. I care about the details that users never see but always notice: FEFO batch tracking, audit logs, WCAG-AA contrast, and RBAC done properly.</p>
         <p>I'm always learning, always building, and looking for opportunities to grow alongside great teams and meaningful projects.</p>
       </div>
       <div class="about-details">
         <div class="detail-item"><span class="detail-label">Location</span><span class="detail-value">Philippines 🇵🇭</span></div>
-        <div class="detail-item"><span class="detail-label">Focus</span><span class="detail-value">Web Development</span></div>
+        <div class="detail-item"><span class="detail-label">Focus</span><span class="detail-value">Full-Stack Web Development</span></div>
+        <div class="detail-item"><span class="detail-label">Core Stack</span><span class="detail-value">PHP · Laravel · React · MySQL</span></div>
         <div class="detail-item"><span class="detail-label">GitHub</span><span class="detail-value">suncheeze-prog</span></div>
         <div class="detail-item"><span class="detail-label">Status</span><span class="detail-value">Open to work ✦</span></div>
       </div>
@@ -575,14 +718,22 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
     <p class="section-label">Skills</p>
     <h2>Technologies I work with.</h2>
     <div class="skills-grid reveal">
-      <div class="skill-cell"><div class="skill-icon">🌐</div><div class="skill-name">HTML & CSS</div><div class="skill-level">Proficient</div></div>
-      <div class="skill-cell"><div class="skill-icon">⚡</div><div class="skill-name">JavaScript</div><div class="skill-level">Proficient</div></div>
-      <div class="skill-cell"><div class="skill-icon">⚛️</div><div class="skill-name">React</div><div class="skill-level">Learning</div></div>
-      <div class="skill-cell"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-level">Familiar</div></div>
-      <div class="skill-cell"><div class="skill-icon">🗃️</div><div class="skill-name">Git & GitHub</div><div class="skill-level">Proficient</div></div>
-      <div class="skill-cell"><div class="skill-icon">🖥️</div><div class="skill-name">Node.js</div><div class="skill-level">Familiar</div></div>
-      <div class="skill-cell"><div class="skill-icon">🗄️</div><div class="skill-name">SQL</div><div class="skill-level">Familiar</div></div>
+      <div class="skill-cell"><div class="skill-icon">🐘</div><div class="skill-name">PHP &amp; Laravel</div><div class="skill-level">Advanced</div></div>
+      <div class="skill-cell"><div class="skill-icon">⚛️</div><div class="skill-name">React</div><div class="skill-level">Advanced</div></div>
+      <div class="skill-cell"><div class="skill-icon">▲</div><div class="skill-name">Next.js</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🟦</div><div class="skill-name">TypeScript</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🌐</div><div class="skill-name">HTML &amp; CSS</div><div class="skill-level">Advanced</div></div>
+      <div class="skill-cell"><div class="skill-icon">⚡</div><div class="skill-name">JavaScript</div><div class="skill-level">Advanced</div></div>
+      <div class="skill-cell"><div class="skill-icon">🎨</div><div class="skill-name">Tailwind CSS</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🗄️</div><div class="skill-name">MySQL &amp; MariaDB</div><div class="skill-level">Advanced</div></div>
+      <div class="skill-cell"><div class="skill-icon">🟩</div><div class="skill-name">Node.js &amp; Express</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🔥</div><div class="skill-name">Firebase</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🪟</div><div class="skill-name">VB.NET / C#</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🗺️</div><div class="skill-name">Leaflet &amp; Geo</div><div class="skill-level">Familiar</div></div>
+      <div class="skill-cell"><div class="skill-icon">🧪</div><div class="skill-name">PHPUnit &amp; Testing</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🗃️</div><div class="skill-name">Git &amp; GitHub</div><div class="skill-level">Proficient</div></div>
       <div class="skill-cell"><div class="skill-icon">🎮</div><div class="skill-name">Game Logic</div><div class="skill-level">Proficient</div></div>
+      <div class="skill-cell"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-level">Familiar</div></div>
     </div>
   </section>
 
@@ -591,24 +742,241 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
     <div class="section-divider"></div>
     <p class="section-label reveal">Projects</p>
     <h2 class="reveal">Things I've built.</h2>
+    <p class="contact-intro reveal" style="max-width: 620px;">A mix of full-stack web platforms, business software, and games — most of them solving a real problem end to end, database and all.</p>
     <div class="projects-grid">
+
+      <!-- SmartStock -->
+      <div class="project-card wide reveal">
+        <button class="project-shot" data-project="SmartStock — Inventory &amp; POS System" data-shots="assets/project-screenshots/smartstock.jpg|assets/project-screenshots/smartstock-pos.jpg" aria-label="View SmartStock screenshots">
+          <img src="assets/project-screenshots/smartstock.jpg" alt="SmartStock dashboard showing 12 KPI cards, alert banners and chart tabs" loading="lazy" />
+          <span class="shot-badge">View screenshots ↗</span>
+        </button>
+        <div class="project-meta">
+          <div class="project-icon">📦</div>
+          <span class="project-lang">VB.NET · WinForms</span>
+        </div>
+        <div class="project-body">
+          <div>
+            <div class="project-title">
+              <h3>SmartStock — Inventory &amp; POS System</h3>
+              <span class="project-featured">Featured</span>
+            </div>
+            <div class="project-tags" style="margin-bottom: 0;">
+              <span class="project-tag">.NET Framework 4.8</span>
+              <span class="project-tag">MySQL / MariaDB</span>
+              <span class="project-tag">POS</span>
+              <span class="project-tag">Barcode</span>
+              <span class="project-tag">Reporting</span>
+              <span class="project-tag">RBAC</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-desc" style="margin-bottom: 1.1rem;">A production-ready inventory and point-of-sale system for retail businesses. Handles barcode scanning, batch tracking with first-expired-first-out, purchase orders, sales with returns, and a dashboard of 12 KPIs with 16 exportable reports. Includes 5-role RBAC and immutable audit logs. Barcode Code 128 labels are generated from scratch with no external libraries.</p>
+            <div class="project-footer">
+              <a href="https://github.com/suncheeze-prog/SmartStock-Inverntory-System" target="_blank" rel="noopener" class="project-link">View on GitHub →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SippaLokka -->
+      <div class="project-card wide reveal">
+        <button class="project-shot" data-project="SippaLokka — Community Shop Directory" data-shots="assets/project-screenshots/sippalokka.jpg" aria-label="View SippaLokka screenshot">
+          <img src="assets/project-screenshots/sippalokka.jpg" alt="SippaLokka homepage with search bar, live map of Manila and shop statistics" loading="lazy" />
+          <span class="shot-badge">View screenshot ↗</span>
+        </button>
+        <div class="project-meta">
+          <div class="project-icon">🧋</div>
+          <span class="project-lang">Laravel · PHP 8.2</span>
+        </div>
+        <div class="project-body">
+          <div>
+            <div class="project-title">
+              <h3>SippaLokka — Community Shop Directory</h3>
+              <span class="project-featured">Featured</span>
+            </div>
+            <div class="project-tags" style="margin-bottom: 0;">
+              <span class="project-tag">Laravel</span>
+              <span class="project-tag">MySQL</span>
+              <span class="project-tag">Leaflet Maps</span>
+              <span class="project-tag">Blade</span>
+              <span class="project-tag">PHPUnit</span>
+              <span class="project-tag">RBAC</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-desc" style="margin-bottom: 1.1rem;">A directory for discovering milk tea shops, coffee houses and cafés across the Philippines. Visitors search by radius with a bounding-box prefilter and map view; owners claim and manage listings; moderators review submissions and reports. Backed by 192 automated tests and 3,300+ assertions, with a pluggable places provider for geocoding.</p>
+            <div class="project-footer">
+              <span class="project-link static">Local project · 192 tests passing</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TakoTayo -->
+      <div class="project-card wide reveal">
+        <button class="project-shot" data-project="TakoTayo — Takoyaki Store Finder" data-shots="assets/project-screenshots/takotayo-home.jpg|assets/project-screenshots/takotayo-stores.jpg|assets/project-screenshots/takotayo-map.jpg" aria-label="View TakoTayo screenshots">
+          <img src="assets/project-screenshots/takotayo-home.jpg" alt="TakoTayo homepage with takoyaki mascot hero and location search" loading="lazy" />
+          <span class="shot-badge">View 3 screenshots ↗</span>
+        </button>
+        <div class="project-meta">
+          <div class="project-icon">🐙</div>
+          <span class="project-lang">PHP 8.2 · MySQL</span>
+        </div>
+        <div class="project-body">
+          <div>
+            <div class="project-title">
+              <h3>TakoTayo — Takoyaki Store Finder</h3>
+              <span class="project-featured">Featured</span>
+            </div>
+            <div class="project-tags" style="margin-bottom: 0;">
+              <span class="project-tag">PHP 8.2</span>
+              <span class="project-tag">MySQL</span>
+              <span class="project-tag">Bootstrap 5</span>
+              <span class="project-tag">Leaflet</span>
+              <span class="project-tag">SEO / JSON-LD</span>
+            </div>
+          </div>
+          <div>
+            <p class="project-desc" style="margin-bottom: 1.1rem;">A database-driven web app that helps people find takoyaki stores anywhere in the Philippines. Full-stack search by city, region, price, rating and distance; a clustered full-screen map; store profiles with menus, hours, photos and owner replies. Store owners get their own dashboard with analytics and listing-edit submissions, and admins get moderation tools. Ships with sitemap, robots and JSON-LD structured data.</p>
+            <div class="project-footer">
+              <a href="https://takotayo.wuaze.com/" target="_blank" rel="noopener" class="project-link">Visit live site →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photobooth Pro -->
       <div class="project-card reveal">
+        <button class="project-shot" data-project="Photobooth Pro" data-shots="assets/project-screenshots/photobooth.jpg" aria-label="View Photobooth Pro screenshot">
+          <img src="assets/project-screenshots/photobooth.jpg" alt="Photobooth Pro kiosk start screen with session timer and three-step flow" loading="lazy" />
+          <span class="shot-badge">View screenshot ↗</span>
+        </button>
+        <div class="project-meta">
+          <div class="project-icon">📸</div>
+          <span class="project-lang">React · TypeScript</span>
+        </div>
+        <h3>Photobooth Pro</h3>
+        <p>A web-based photobooth system: admins design unlimited photo-strip templates and publish them, then a customer at the kiosk picks a package, picks a design, takes their photos and walks away with a printed strip. Includes a printer bridge and a full operator dashboard.</p>
+        <div class="project-tags">
+          <span class="project-tag">React</span>
+          <span class="project-tag">TypeScript</span>
+          <span class="project-tag">Vite</span>
+          <span class="project-tag">Express</span>
+          <span class="project-tag">Tailwind</span>
+          <span class="project-tag">MySQL</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-link static">Local project</span>
+        </div>
+      </div>
+
+      <!-- Chess Math Game -->
+      <div class="project-card reveal">
+        <button class="project-shot" data-project="Chess Math Game" data-shots="assets/project-screenshots/chess-game.jpg|assets/project-screenshots/chess-tutorial.jpg" aria-label="View Chess Math Game screenshots">
+          <img src="assets/project-screenshots/chess-game.jpg" alt="Ahedres mode select with 2 player and vs AI options plus difficulty and math topic settings" loading="lazy" />
+          <span class="shot-badge">View 2 screenshots ↗</span>
+        </button>
+        <div class="project-meta">
+          <div class="project-icon">♟️</div>
+          <span class="project-lang">React · Firebase</span>
+        </div>
+        <h3>Chess Math Game</h3>
+        <p>A chess game where every move requires solving a math question first. Real-time online multiplayer via Firebase Realtime Database, email/password auth, Firestore user profiles, a timed question modal, and a coin economy with a shop for board themes.</p>
+        <div class="project-tags">
+          <span class="project-tag">React</span>
+          <span class="project-tag">Firebase</span>
+          <span class="project-tag">Firestore</span>
+          <span class="project-tag">Real-time</span>
+          <span class="project-tag">Multiplayer</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-link static">Local project</span>
+        </div>
+      </div>
+
+      <!-- Real State -->
+      <div class="project-card reveal">
+        <button class="project-shot" data-project="Real State" data-shots="assets/project-screenshots/realstate.jpg" aria-label="View Real State screenshot">
+          <img src="assets/project-screenshots/realstate.jpg" alt="Luxe Estates hero with property search, filters and listing statistics" loading="lazy" />
+          <span class="shot-badge">View screenshot ↗</span>
+        </button>
+        <div class="project-meta">
+          <div class="project-icon">🏠</div>
+          <span class="project-lang">Next.js 16 · React 19</span>
+        </div>
+        <h3>Real State</h3>
+        <p>A modern property listing platform built on Next.js App Router with React 19 and Tailwind. Browse and filter properties, view detail pages with galleries, save favourites, and manage everything from an owner dashboard. Radix UI primitives, Framer Motion animations and Recharts for visualisations.</p>
+        <div class="project-tags">
+          <span class="project-tag">Next.js</span>
+          <span class="project-tag">React 19</span>
+          <span class="project-tag">Tailwind</span>
+          <span class="project-tag">TypeScript</span>
+          <span class="project-tag">Radix UI</span>
+          <span class="project-tag">Recharts</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-link static">Local project</span>
+        </div>
+      </div>
+
+      <!-- Squadrant -->
+      <div class="project-card reveal">
+        <button class="project-shot" data-project="Squadrant Game" data-shots="assets/project-screenshots/squadrant.jpg" aria-label="View Squadrant Game screenshot">
+          <img src="assets/project-screenshots/squadrant.jpg" alt="Squadrant naval command system login with radar grid interface" loading="lazy" />
+          <span class="shot-badge">View screenshot ↗</span>
+        </button>
+        <div class="project-meta">
+          <div class="project-icon">🎯</div>
+          <span class="project-lang">JavaScript · React</span>
+        </div>
+        <h3>Squadrant Game</h3>
+        <p>A military-themed strategy game built in React. Fully responsive from 320px phones up to 4K, with a synthesised audio system (7 sound effects, volume control), WCAG-AA light and dark themes that persist in localStorage, and a swappable PNG/emoji icon pipeline.</p>
+        <div class="project-tags">
+          <span class="project-tag">React</span>
+          <span class="project-tag">Canvas</span>
+          <span class="project-tag">Web Audio</span>
+          <span class="project-tag">Theming</span>
+        </div>
+        <div class="project-footer">
+          <span class="project-link static">Local project</span>
+        </div>
+      </div>
+
+      <!-- Snake & Ladders -->
+      <div class="project-card reveal">
+        <button class="project-shot" data-project="Snake &amp; Ladders" data-shots="assets/project-screenshots/snake-ladders.jpg" aria-label="View Snake and Ladders screenshot">
+          <img src="assets/project-screenshots/snake-ladders.jpg" alt="Snakes and Ladders main menu with start game and player selection" loading="lazy" />
+          <span class="shot-badge">View screenshot ↗</span>
+        </button>
         <div class="project-meta">
           <div class="project-icon">🎲</div>
           <span class="project-lang">JavaScript</span>
         </div>
-        <h3>Snake & Ladders</h3>
-        <p>A classic board game built in JavaScript — fully playable in the browser with game logic, dice rolls, and turn management.</p>
-        <a href="https://ubiquitous-paletas-1b047a.netlify.app/" target="_blank" class="project-link">View on GitHub →</a>
+        <h3>Snake &amp; Ladders</h3>
+        <p>A classic board game built in vanilla JavaScript — fully playable in the browser with complete game logic, dice rolls and turn management. Deployed and live.</p>
+        <div class="project-tags">
+          <span class="project-tag">JavaScript</span>
+          <span class="project-tag">Game Logic</span>
+          <span class="project-tag">CSS</span>
+        </div>
+        <div class="project-footer">
+          <a href="https://ubiquitous-paletas-1b047a.netlify.app/" target="_blank" rel="noopener" class="project-link">Play live →</a>
+        </div>
       </div>
+
+      <!-- More coming soon -->
       <div class="project-card reveal" style="border-style: dashed; background: transparent;">
         <div class="project-meta">
           <div class="project-icon" style="background: var(--bg);">✦</div>
         </div>
         <h3 style="color: var(--muted);">More coming soon</h3>
         <p>I'm currently working on new projects. Check back or follow me on GitHub to stay updated.</p>
-        <a href="https://github.com/suncheeze-prog" target="_blank" class="project-link">Follow on GitHub →</a>
+        <div class="project-footer">
+          <a href="https://github.com/suncheeze-prog" target="_blank" rel="noopener" class="project-link">Follow on GitHub →</a>
+        </div>
       </div>
+
     </div>
   </section>
 
@@ -640,22 +1008,35 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
           </div>
           <span class="contact-arrow">→</span>
         </a>
-        <div class="contact-row" style="cursor: default; opacity: 0.45;">
+        <a href="https://www.linkedin.com/in/allen-sanchez-007512404/" target="_blank" rel="noopener" class="contact-row">
           <div class="contact-row-left">
-            <div class="contact-dot" style="background: var(--muted);"></div>
+            <div class="contact-dot"></div>
             <div>
               <div class="contact-platform">LinkedIn</div>
-              <div class="contact-value">Allen Sanchez <span class="linkedin-note">(coming soon)</span></div>
+              <div class="contact-value">Allen Sanchez</div>
             </div>
           </div>
-          <span class="contact-arrow" style="opacity:0.3;">→</span>
-        </div>
+          <span class="contact-arrow">→</span>
+        </a>
       </div>
     </div>
   </section>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project screenshots">
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lb-btn lb-prev hidden" id="lbPrev" aria-label="Previous">&#8249;</button>
+    <button class="lb-btn lb-next hidden" id="lbNext" aria-label="Next">&#8250;</button>
+    <img id="lbImg" src="" alt="" />
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+
   <footer>
     <span>© 2026 Allen Sanchez</span>
+    <div class="footer-social">
+      <a href="https://github.com/suncheeze-prog" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/allen-sanchez-007512404/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:sanchezallen2003@gmail.com">Email</a>
+    </div>
     <span>Built with care ✦</span>
   </footer>
 
@@ -678,6 +1059,54 @@ background: conic-gradient(from 0deg, var(--accent), #1a5c28, var(--accent));
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
+
+    // Screenshot lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    let lbList = [], lbIdx = 0, lastFocus = null;
+
+    function lbShow(i) {
+      lbIdx = (i + lbList.length) % lbList.length;
+      lbImg.src = lbList[lbIdx];
+      lbImg.alt = document.querySelector('.project-shot[data-open]')?.dataset.project || 'Project screenshot';
+      const many = lbList.length > 1;
+      lbPrev.classList.toggle('hidden', !many);
+      lbNext.classList.toggle('hidden', !many);
+      lbCaption.innerHTML = '<strong>' + (lbImg.alt) + '</strong> — ' + (lbIdx + 1) + ' of ' + lbList.length;
+    }
+
+    function lbOpen(btn) {
+      lastFocus = btn;
+      btn.dataset.open = '1';
+      lbList = btn.dataset.shots.split('|');
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lbShow(0);
+      document.getElementById('lbClose').focus();
+    }
+
+    function lbClose() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      if (lastFocus) { delete lastFocus.dataset.open; lastFocus.focus(); }
+    }
+
+    document.querySelectorAll('.project-shot').forEach(btn => {
+      btn.addEventListener('click', () => lbOpen(btn));
+    });
+    document.getElementById('lbClose').addEventListener('click', lbClose);
+    lbPrev.addEventListener('click', e => { e.stopPropagation(); lbShow(lbIdx - 1); });
+    lbNext.addEventListener('click', e => { e.stopPropagation(); lbShow(lbIdx + 1); });
+    lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') lbClose();
+      if (e.key === 'ArrowLeft') lbShow(lbIdx - 1);
+      if (e.key === 'ArrowRight') lbShow(lbIdx + 1);
+    });
 
     // Particle network
     const canvas = document.getElementById('particle-canvas');
